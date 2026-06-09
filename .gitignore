@@ -1,0 +1,14 @@
+# Build artifacts
+build/
+*.o
+*.bc
+helios
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
