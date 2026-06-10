@@ -17,6 +17,15 @@ enum class VMResult{   // VM needs to report what went wrong, these are basicall
     STACK_UNDERFLOW,
     DIVISION_BY_ZERO,
     UNKNOWN_OPCODE,
+    CALLSTACK_OVERFLOW,
+    CALLSTACK_UNDERFLOW,
+};
+
+constexpr size_t CALLSTACK_MAX = 512;
+
+struct Frame {
+    size_t  return_ip;
+    int64_t locals[256] = {};
 };
 
 class VM{
@@ -35,14 +44,17 @@ private:
    bool debug_mode_;
    size_t ip_;
    std::vector<int64_t> stack_;
-   int64_t locals_[256] = {};   // for storing local variables,SLOT
-
+   std::vector<Frame> call_stack_;
+   
    // stack helpers
+
    VMResult push(int64_t val);
    VMResult pop(int64_t& out);
    int64_t peek() const;
+   Frame& current_frame();
 
    // debug helper
+
    void debug_print(const Instruction& instr) const;
    std::string opcode_name(OpCode op) const;
 
