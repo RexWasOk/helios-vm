@@ -1,0 +1,26 @@
+; Helios VM — factorial(5)
+; result should be 120
+
+main:
+    PUSH 5
+    CALL factorial
+    PRINTLN
+    HALT
+
+factorial:
+    STORE 0
+    LOAD 0
+    PUSH 1
+    LTE
+    JNZ base_case
+    LOAD 0
+    LOAD 0
+    PUSH 1
+    SUB
+    CALL factorial
+    MUL
+    RET
+
+base_case:
+    PUSH 1
+    RET

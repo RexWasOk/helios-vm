@@ -1,0 +1,29 @@
+; Helios VM — fibonacci(10)
+; result should be 55
+
+main:
+    PUSH 10
+    CALL fibonacci
+    PRINTLN
+    HALT
+
+fibonacci:
+    STORE 0
+    LOAD 0
+    PUSH 1
+    LTE
+    JNZ base_case
+    LOAD 0
+    PUSH 1
+    SUB
+    CALL fibonacci
+    LOAD 0
+    PUSH 2
+    SUB
+    CALL fibonacci
+    ADD
+    RET
+
+base_case:
+    LOAD 0
+    RET
